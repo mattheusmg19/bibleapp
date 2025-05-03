@@ -65,7 +65,10 @@ function carregarHinos() {
 
     const infoDiv = document.createElement('div');
     infoDiv.className = 'hino-info';
-    infoDiv.innerHTML = `<h2>${hino.hino}</h2>`;
+
+    // Remove o número do título na tela inicial
+    const nomeHino = hino.hino.replace(/^\d+\s*-\s*/, ""); 
+    infoDiv.innerHTML = `<h2>${nomeHino}</h2>`;
 
     div.appendChild(idDiv);
     div.appendChild(infoDiv);
@@ -87,19 +90,19 @@ function carregarLetra(hinoNum) {
   const titulo = document.getElementById('titulo-hino');
   const versiculosDiv = document.getElementById('versiculos');
 
-  titulo.textContent = hino.hino;
-  versiculosDiv.innerHTML = '<h3>Versos:</h3>';
+  // Mantém o número no título da tela interna
+  titulo.textContent = hino.hino; 
+  versiculosDiv.innerHTML = '<h3></h3>';
 
   Object.keys(hino.verses).forEach(num => {
-    // Criar elemento do verso
     const p = document.createElement('p');
     p.innerHTML = `${num}. ${hino.verses[num].replace(/<br>/g, "")}`;
     versiculosDiv.appendChild(p);
 
-    // Criar elemento do coro abaixo de cada verso
+    // Adiciona o coro abaixo de cada verso
     const coroP = document.createElement('p');
-    coroP.className = 'coro'; // Adicionando a classe para aplicar o estilo
-    coroP.innerHTML = `<em><strong>Coro:</strong> ${hino.coro.replace(/<br>/g, "")}</em>`;
+    coroP.className = 'coro'; 
+    coroP.innerHTML = `<em><strong></strong> ${hino.coro.replace(/<br>/g, "")}</em>`;
     versiculosDiv.appendChild(coroP);
   });
 
