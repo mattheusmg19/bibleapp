@@ -133,6 +133,12 @@ body {
     box-sizing: border-box;
   }
 
+  ::selection{
+    background-color: #BB86FC;
+    color: #121212;
+  }
+
+
 /* Responsividade */
 /* Para tablets e telas menores */
 @media (max-width: 768px) {
