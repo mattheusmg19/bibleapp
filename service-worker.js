@@ -3,8 +3,7 @@ self.addEventListener("install", event => {
       caches.open("biblia-harpa-cache").then(cache => {
         return cache.addAll([
           "./index.html",
-          "./styles.css",
-          "./script.js",
+          "./style.css",
           "./manifest.json",
           "./logo192.png",
           "./logo.512.png"
