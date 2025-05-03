@@ -192,7 +192,7 @@ body {
 
     .tela{
       max-width: 100%;
-      margin-top: 45px;
+      margin-top: 55px;
     }
 
     .livro {
@@ -214,9 +214,14 @@ body {
       font-size: 20px;
       padding: 16px 6px;
     }
-  
-    h1 {
-      font-size: 18px;
+    
+    .title-app{
+      padding: 0 15px;
+    }
+
+    .title-app h1 {
+      font-size: 25px;
+      padding: 0;
     }
   }
   
