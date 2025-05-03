@@ -145,11 +145,33 @@ body {
     color: #ddd;
     font-size: 20px;
   }
+
+  /*search*/  
+  #search-input {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    width: 99%;
+    padding: 10px;
+    margin: -5px 40px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    outline: none;
+    background-color: #121212;
+    font-size: 15px;
+    color: white;
+    box-sizing: border-box;
+  }
+    
   /* Responsividade */
   /* Para tablets e telas menores */
   @media (max-width: 768px) {
     body {
       padding: 20px;
+    }
+
+    #search-input {
+      width: 90%;
+      margin: auto;
     }
 
     .tela{
@@ -222,6 +244,11 @@ body {
     .title-app h1 {
       font-size: 25px;
       padding: 0;
+    }
+
+    #search-input{
+      width: 95%;
+      margin: 0 10px;
     }
   }
   
