@@ -1,22 +1,14 @@
 self.addEventListener("install", event => {
-    event.waitUntil(
-      caches.open("biblia-harpa-cache").then(cache => {
-        return cache.addAll([
-          "./index.html",
-          "./style.css",
-          "./manifest.json",
-          "./logo192.png",
-          "./logo.512.png"
-        ]);
-      })
-    );
-  });
-  
-  self.addEventListener("fetch", event => {
-    event.respondWith(
-      caches.match(event.request).then(response => {
-        return response || fetch(event.request);
-      })
-    );
-  });
-  
+  event.waitUntil(
+    caches.open("biblia-harpa-cache").then(cache => {
+      return cache.addAll([
+        "./index.html",
+        "./style.css",
+        "./script.js",
+        "./manifest.json",
+        "./logo192.png",
+        "./logo512.png"
+      ]).catch(error => console.error("Erro ao adicionar ao cache:", error));
+    })
+  );
+});
