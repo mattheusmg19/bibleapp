@@ -1,0 +1,172 @@
+/*importação de fontes*/
+@import url(./font.css);
+
+/* Configuração padrão */
+body {
+    font-family: 'Outfit';
+    padding: 20px;
+    background-color: #121212;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+  
+.tela {
+    display: none;
+    margin-top: 50px;
+    max-width: 800px;
+    width: 100%;
+}
+  
+.ativa {
+    display: block;
+}
+
+.title-app {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 3px 15px;
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    background-color: #1E1E1E;
+    color: white;
+    user-select: none;
+    box-sizing: border-box;
+}
+  
+/* Estilo da lista de hinos */
+.hino {
+    display: flex;
+    align-items: center;
+    background-color: #1E1E1E;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    gap: 10px;
+    margin: 10px 0;
+    border-radius: 10px;
+    user-select: none;
+}
+
+/* Número do hino em círculo */
+.hino-id {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: #BB86FC;
+    color: white;
+    font-weight: bold;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+/* Informação do hino */
+.hino-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.hino h2 {
+    margin: 0;
+    font-size: 20px;
+    color: white;
+}
+
+.voltar {
+    color: white;
+    float: right;
+    background-color: #1E1E1E;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 10px;
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.voltar span{
+    font-size: 14px;
+}
+
+#titulo-hino {
+    margin-top: 10px;
+    color: white;
+    user-select: none;
+}
+
+/* Estilo da exibição dos hinos */
+#versiculos {
+    color: #ddd;
+    font-size: 20px;
+}
+
+.coro {
+    font-weight: bold;
+    color: #BB86FC;
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Responsividade */
+/* Para tablets e telas menores */
+@media (max-width: 768px) {
+    .tela {
+        max-width: 100%;
+        margin-top: 45px;
+    }
+
+    .hino {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .hino-id {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+        margin-right: 8px;
+    }
+
+    h1 {
+        font-size: 22px;
+        text-align: center;
+    }
+}
+
+/* Para celulares */
+@media (max-width: 480px) {
+    .tela {
+        max-width: 100%;
+        margin-top: 55px;
+    }
+
+    .hino {
+        align-items: center;
+        padding: 10px;
+    }
+
+    .hino-id {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .title-app {
+        padding: 0 15px;
+    }
+
+    .title-app h1 {
+        font-size: 25px;
+        padding: 0;
+    }
+}
