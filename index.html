@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=arrow_back_ios" />
+  <title>Bíblia ARC</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <div class="title-app">
+    <svg xmlns="http://www.w3.org/2000/svg" class="menu" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M120-240v-80h240v80H120Zm0-200v-80h480v80H120Zm0-200v-80h720v80H120Z"/></svg>    <h1>Bíblia Sagrada</h1>
+    <svg xmlns="http://www.w3.org/2000/svg" class="search" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+  </div>
+    
+  <div id="tela-livros" class="tela ativa"></div>
+  <div id="tela-capitulos" class="tela">
+    <div class="voltar" onclick="voltarParaLivros()">
+      <span class="material-symbols-outlined">
+        arrow_back_ios
+      </span>Voltar
+    </div>
+    <h2 id="titulo-livro"></h2>
+    <div id="lista-capitulos" class="capitulos-grid"></div>
+  </div>
+  <div id="tela-versiculos" class="tela">
+    <div class="voltar" onclick="voltarParaCapitulos()">
+      <span class="material-symbols-outlined">
+        arrow_back_ios
+      </span>Voltar
+    </div>
+    <h2 id="titulo-capitulo"></h2>
+    <div id="versiculos"></div>
+  </div>
+
+  <script>
+    let biblia = [];
+
+fetch('./arc.json')
+  .then(response => response.json())
+  .then(data => {
+    biblia = data;
+    carregarLivros();
+  })
+  .catch(error => console.error("Erro ao carregar o JSON:", error));
+
+function mostrarTela(id) {
+  document.querySelectorAll('.tela').forEach(tela => tela.classList.remove('ativa'));
+  document.getElementById(id).classList.add('ativa');
+}
+
+function carregarLivros() {
+  const container = document.getElementById('tela-livros');
+  container.innerHTML = '';
+
+  if (!biblia.length) {
+    container.innerHTML = "<p>Erro ao carregar os livros. Verifique o JSON.</p>";
+    return;
+  }
+
+  biblia.forEach((livro, index) => {
+    const div = document.createElement('div');
+    div.className = 'livro';
+    
+    const idDiv = document.createElement('div');
+    idDiv.className = 'livro-id';
+    idDiv.textContent = livro.id.toUpperCase();
+
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'livro-info';
+    infoDiv.innerHTML = `<h2>${livro.name}</h2><small>Capítulos: ${livro.chapters.length}</small>`;
+
+    // Definir cor do fundo baseado no testamento
+    idDiv.style.backgroundColor = livro.testamento === "at" ? "#BB86FC" : "#03DAC5";
+
+    div.appendChild(idDiv);
+    div.appendChild(infoDiv);
+    div.onclick = () => carregarCapitulos(index);
+    container.appendChild(div);
+  });
+
+  mostrarTela('tela-livros');
+}
+
+let livroSelecionado = 0;
+
+function carregarCapitulos(index) {
+  livroSelecionado = index;
+  const livro = biblia[index];
+
+  if (!livro || !livro.chapters) {
+    console.error("Erro: Livro ou capítulos não encontrados.");
+    return;
+  }
+
+  const titulo = document.getElementById('titulo-livro');
+  const container = document.getElementById('lista-capitulos');
+
+  titulo.textContent = `${livro.name}`;
+  container.innerHTML = '';
+
+  livro.chapters.forEach((_, i) => {
+    const botao = document.createElement('div');
+    botao.className = 'capitulo';
+    botao.textContent = i + 1;
+
+    // Definir cor do fundo baseado no testamento
+    botao.style.backgroundColor = livro.testamento === "at" ? "#BB86FC" : "#03DAC5";
+
+    botao.onclick = () => carregarVersiculos(i);
+    container.appendChild(botao);
+  });
+
+  mostrarTela('tela-capitulos');
+}
+
+function carregarVersiculos(capIndex) {
+  const livro = biblia[livroSelecionado];
+  if (!livro || !livro.chapters || !livro.chapters[capIndex]) {
+    console.error("Erro: Capítulo não encontrado.");
+    return;
+  }
+
+  const versiculos = livro.chapters[capIndex];
+  const container = document.getElementById('versiculos');
+  const titulo = document.getElementById('titulo-capitulo');
+
+  titulo.textContent = `${livro.name} ${capIndex + 1}`;
+  container.innerHTML = '';
+
+  versiculos.forEach((texto, i) => {
+    const p = document.createElement('p');
+    p.textContent = `${i + 1}. ${texto}`;
+    container.appendChild(p);
+  });
+
+  mostrarTela('tela-versiculos');
+}
+
+function voltarParaLivros() {
+  mostrarTela('tela-livros');
+}
+
+function voltarParaCapitulos() {
+  mostrarTela('tela-capitulos');
+}
+  </script>
+</body>
+</html>
