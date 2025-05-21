@@ -12,12 +12,16 @@ let biblia = [];
 // Atualizar o `<select>` com a versão salva
 document.getElementById("version").value = versaoSelecionada;
 
+document.getElementById("title-app").innerHTML = "Versão: " + versaoSelecionada.toLocaleUpperCase();
+
 // Evento para detectar mudança na versão selecionada
 document.getElementById("version").addEventListener("change", function () {
     versaoSelecionada = this.value;
     localStorage.setItem("bibliaVersao", versaoSelecionada); // Salva preferência do usuário
+    document.getElementById("title-app").innerHTML = "Versão: " + versaoSelecionada.toLocaleUpperCase();
     carregarBiblia();
 });
+
 
 // Função para carregar a Bíblia com base na versão escolhida
 function carregarBiblia() {

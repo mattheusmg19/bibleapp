@@ -39,6 +39,25 @@ body {
       box-sizing: border-box;
   }
   
+  .titleSubtitle{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .titleSubtitle h1, .titleSubtitle h5{
+    margin: 0;
+    padding: 0;
+  }
+
+  #title-app{
+    color: #BB86FC;
+    font-weight: 300;
+    margin-top: 5px;
+    margin-bottom: -5px;
+    letter-spacing: 2px;
+  }
+
   /* Estilo dos livros */
   .livro {
     display: flex;
