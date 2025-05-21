@@ -83,6 +83,10 @@
   background-color: #BB86FC;
 }
 
+.ativo{
+  background-color: #BB86FC;
+}
+
 /* Select de versão */
 .sidebar #version {
   background-color: #1E1E1E;
